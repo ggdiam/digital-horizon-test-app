@@ -131,6 +131,9 @@ class App extends Component {
                     hlp.sortTree(selectedSort.field, it);
                 }
             }
+
+            //update url, reset selected
+            hlp.saveUrlState({ selectedIds: [], selectedSort: selectedSort });
             
             this.setState({ list: list, tree: tree, selectedIds: selectedIds, columns: columns });
         }
