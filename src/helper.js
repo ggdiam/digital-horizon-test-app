@@ -64,6 +64,22 @@ const hlp = {
         for (const ch of item.children) {
             hlp.sortTree(field, ch);
         }
+    },
+
+    saveUrlState(state) {
+        let json = JSON.stringify(state);
+        window.location.hash = json;
+    },
+
+    getUrlState() {
+        let state;
+        try {
+            let hash = decodeURIComponent(window.location.hash);
+            hash = hash.substring(1);//remove #
+            state = JSON.parse(hash);
+        }
+        catch (ignore) { }
+        return state;
     }
 }
 

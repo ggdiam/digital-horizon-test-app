@@ -11,15 +11,27 @@ class App extends Component {
     constructor(props) {
         super(props);
 
+        //restore url state
+        let urlState = hlp.getUrlState() || {};
+        let { selectedIds, selectedSort } = urlState;
+        selectedIds = selectedIds || [];
+
         const list = file || [];
         const tree = hlp.listToTree(list);
+
+        //if sort set - sort
+        if (selectedSort) {
+            for (const it of tree) {
+                hlp.sortTree(selectedSort.field, it);
+            }
+        }        
 
         this.state = {
             tree: tree,
             list: list,
-            columns: hlp.getColumns(tree, []),
-            selectedIds: [],
-            selectedSort: null
+            columns: hlp.getColumns(tree, selectedIds),
+            selectedIds: selectedIds,
+            selectedSort: selectedSort
         }
     }
 
@@ -44,7 +56,7 @@ class App extends Component {
     }
 
     itemClick = (item) => {
-        let { selectedIds, tree } = this.state;
+        let { selectedIds, tree, selectedSort } = this.state;
 
         //toggle
         let ix = selectedIds.findIndex(it => it.id === item.id);
@@ -56,6 +68,9 @@ class App extends Component {
             //leave selected current item and his parents
             selectedIds = selectedIds.filter(si => si.id === item.id || (si.id !== item.id && si.level < item.level));
         }
+
+        //update url
+        hlp.saveUrlState({ selectedIds, selectedSort });
 
         let columns = hlp.getColumns(tree, selectedIds);
         this.setState({ selectedIds: selectedIds, columns: columns });
@@ -77,7 +92,7 @@ class App extends Component {
     }
 
     onSortChange = (sortItem) => {
-        let { selectedSort, tree } = this.state;
+        let { selectedSort, tree, selectedIds } = this.state;
 
         //toggle
         if (selectedSort && selectedSort.field === sortItem.field) {
@@ -95,24 +110,28 @@ class App extends Component {
             }
         }
 
+        //update url
+        hlp.saveUrlState({ selectedIds, selectedSort: sortItem });
+
         this.setState({ selectedSort: sortItem, tree: [...tree] });
     }
 
     onChangeData = (list) => {
         let { selectedSort } = this.state;
-        
+
         if (list) {
             //reset
             const tree = hlp.listToTree(list);
             const selectedIds = [];
             let columns = hlp.getColumns(tree, selectedIds);
-            
+
             //if sort set - sort
             if (selectedSort) {
                 for (const it of tree) {
                     hlp.sortTree(selectedSort.field, it);
                 }
             }
+            
             this.setState({ list: list, tree: tree, selectedIds: selectedIds, columns: columns });
         }
     }
