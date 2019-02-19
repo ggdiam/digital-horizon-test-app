@@ -6,9 +6,115 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #E5E5E5;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.App {
+    width: 1200px;
+    margin: 20px auto 40px;
+
+    font-size: 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+}
+
+#drop_zone {
+    border: 2px dashed #bbb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+    color: #bbb;
+}
+
+.lbl {
+    display: inline-block;
+    color: #E80000;
+}
+
+.sort-panel {    
+    margin-top: 20px;
+    padding: 12px 20px 10px;
+    text-align: left;
+    vertical-align: middle;
+    background: #EDEDED;
+}
+
+.sort-lbl {    
+    margin-right: 20px;
+}
+
+.sort-btn {
+    display: inline-block;
+    width: 110px;
+    margin-right: 10px;
+    padding: 4px 0;
+    border-radius: 3px;
+
+    cursor: pointer;
+    text-align: center;
+    color: #FFFFFF;
+    background: #6383D5;    
+    transition: background-color .3s;
+}
+
+.sort-btn.selected {
+    background: #0041E8;
+}
+
+.tree-container {
+    display: flex;
+    min-height: 400px;
+    overflow: auto;
+    background: #D2D2D2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.tree-column { 
+    flex: 1 0 220px;
+    max-width: 220px;
+    padding: 10px 15px 10px 30px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}
+
+.column-lbl {
+    margin-bottom: 10px;
+}
+
+.item {
+    margin-bottom: 10px;
+    margin-right: 15px;
+    padding: 10px 15px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    transition: margin .3s;
+}
+
+.item.selected {
+    margin-left: 15px;
+    margin-right: 0;
+}
+
+.item.has-children {
+    background: #FBFFEC;
+    cursor: pointer;
+}
+
+.item-name {
+    text-align: left;
+    color: #0041E8;
+}
+
+.item-age {    
+    text-align: right;
+    color: #E80000;
 }
