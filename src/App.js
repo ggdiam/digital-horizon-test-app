@@ -70,7 +70,7 @@ class App extends Component {
                 <SortPanel selectedSort={selectedSort} onChange={this.onSortChange} />
 
                 <div className="tree-container">
-                    {columns.map(this.renderColumn)}                   
+                    {columns.map(this.renderColumn)}
                 </div>
             </div>
         );
@@ -99,12 +99,21 @@ class App extends Component {
     }
 
     onChangeData = (list) => {
+        let { selectedSort } = this.state;
+        
         if (list) {
             //reset
             const tree = hlp.listToTree(list);
             const selectedIds = [];
             let columns = hlp.getColumns(tree, selectedIds);
-            this.setState({ list: list, tree: tree, selectedIds: selectedIds, columns: columns, selectedSort: null });
+            
+            //if sort set - sort
+            if (selectedSort) {
+                for (const it of tree) {
+                    hlp.sortTree(selectedSort.field, it);
+                }
+            }
+            this.setState({ list: list, tree: tree, selectedIds: selectedIds, columns: columns });
         }
     }
 }
