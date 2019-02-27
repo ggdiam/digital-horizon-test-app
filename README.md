@@ -1,4 +1,4 @@
-# Digital Horizon - Тестовое задание
+# Digital Horizon / Диджитал Горизонт - Тестовое задание
 
 # https://ggdiam.github.io/digital-horizon-test-app
 
