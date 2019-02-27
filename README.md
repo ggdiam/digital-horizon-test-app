@@ -1,5 +1,7 @@
 # Digital Horizon - Тестовое задание
 
+# https://ggdiam.github.io/digital-horizon-test-app
+
 ## Входные данные:
 * Файл с данными (`sample.json`)
 
